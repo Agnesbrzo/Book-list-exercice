@@ -22,9 +22,9 @@ ActionWithListItem.prototype.clearForm = function () {
   const isbn = (document.querySelector(".isbn").value = "");
 };
 
-ActionWithListItem.prototype.deleteItem = function (e) {
-  if (e.target.classList.contains("delete")) {
-    e.target.parentElement.remove();
+ActionWithListItem.prototype.deleteItem = function (target) {
+  if (target.classList.contains("delete")) {
+    target.parentElement.parentElement.remove();
   }
 };
 
@@ -58,4 +58,11 @@ form.addEventListener("submit", function (e) {
     actionWithListItem.clearForm();
   }
   e.preventDefault();
+});
+
+const listContainer = document.querySelector(".table-book__list");
+listContainer.addEventListener("click", function () {
+  const actionWithListItem = new ActionWithListItem();
+  actionWithListItem.showAlert("You've deleted a book", "error");
+  actionWithListItem.deleteItem(e.target);
 });
